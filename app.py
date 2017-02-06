@@ -40,22 +40,16 @@ def wikidata_id(viaf):
 def classify(isbn):
     url = "http://classify.oclc.org/classify2/Classify?isbn={}".format(isbn)
     response = requests.get(url)
-
     tree = etree.fromstring(response.content)
-
     response_code = tree.xpath(Paths.RESPONSE_CODE, namespaces=ns)
-
     result = []
     if (response_code[0] in ["0", "2", "4"]):
         for author in tree.xpath(Paths.AUTHORS, namespaces=ns):
             viaf = author.xpath(Paths.VIAF, namespaces=ns)
-
             wikidataId = wikidata_id(viaf[0])
-
             result.append({'viaf': viaf[0],
                            'name': author.text,
                            'wikidata_id': wikidataId})
-
     return result
 
 
@@ -73,7 +67,6 @@ def classify_api(isbn):
         result = classify(isbn)
         r.set(isbn, json.dumps(result))
         return jsonify(result)
-
 
 if __name__ == '__main__':
     app.run(debug=True)
