@@ -4,9 +4,13 @@ simple http wrapper around [OCLC Classify](http://classify.oclc.org/classify2/ap
 run:
 
 	~ git clone https://github.com/atomotic/isbn-authors
+	~ cd isbn-authors
 	~ pip install -r requirements.txt
 	
-	~ redis-server # to cache results
+	# install redis, used to cache results.
+	# apt-get install redis-server (linux)
+	# brew install redis (macos)
+	~ redis-server 
 	
 	~ FLASK_APP=app.py FLASK_DEBUG=1 flask run
 
