@@ -1,0 +1,7 @@
+Flask
+lxml
+SPARQLWrapper
+requests
+gunicorn
+gevent
+redis
