@@ -3,23 +3,7 @@ simple http wrapper around [OCLC Classify](http://classify.oclc.org/classify2/ap
 
 run:
 
-	~ git clone https://github.com/atomotic/isbn-authors
-	~ cd isbn-authors
-	~ pip install -r requirements.txt
+	docker run -d -p 8093:8093 atomotic/isbn-authors 
 	
-	# install redis, used to cache results.
-	# apt-get install redis-server (linux)
-	# brew install redis (macos)
-	~ redis-server 
-	
-	~ FLASK_APP=app.py FLASK_DEBUG=1 flask run
 
-	~ http :5000/api/v1/authors/{ISBN}
 
----
-
-examples at:
-[https://isbn-authors.herokuapp.com](https://isbn-authors.herokuapp.com/)
-
-* https://isbn-authors.herokuapp.com/api/v1/authors/9788806189877
-* https://isbn-authors.herokuapp.com/api/v1/authors/9788845930874
