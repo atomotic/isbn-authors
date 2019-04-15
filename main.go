@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/gorilla/mux"
@@ -128,10 +129,15 @@ func main() {
 		return nil
 	})
 
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8093"
+	}
+
 	r := mux.NewRouter()
 	r.HandleFunc("/isbn/{isbn}", IsbnAPI)
-	fmt.Println("server running on http://localhost:8093/isbn/{$ISBN}")
+	fmt.Printf("server running on http://localhost:%s/isbn/{$ISBN}", port)
 
-	http.ListenAndServe(":8093", r)
+	http.ListenAndServe(fmt.Sprintf(":%s", port), r)
 
 }
